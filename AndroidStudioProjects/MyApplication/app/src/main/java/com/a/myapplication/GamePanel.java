@@ -21,9 +21,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
 
     private RectPlayer pRect;
+    private Buttons leftKey;
+    private Buttons rightKey;
     private Point playerPoint;
+    private Point leftKeyPos;
+    private Point rightKeyPos;
+    private Point btnSize;
     private final int speed = 5;
     private Button btn;
+    private Bitmap leftKeyImg = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+    private Bitmap rightKeyImg = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+	private Bitmap bmp;
     //private ImageView img;
 
     public GamePanel(Context context) {
@@ -39,13 +47,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         playerPoint = new Point(this.getWidth() / 2, this.getHeight());
 
         pRect = new RectPlayer(playerPoint.x, playerPoint.y, Color.rgb(255, 0, 0));
+	//btnSize.set(110,100);
 
-        btn = new Button(context);
+	leftKey = new Buttons(leftKeyPos, btnSize, leftKeyImg);
+	rightKey = new Buttons(rightKeyPos, btnSize, rightKeyImg);
+	
 
-        btn.setLeft(50);
-        btn.setRight(50);
-        btn.setWidth(100);
-        btn.setHeight(100);
+        //btn = new Button(context);
+
+        //btn.setLeft(50);
+        //btn.setRight(50);
+        //btn.setWidth(100);
+        //btn.setHeight(100);
+        bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spacecraft1);
+        bmp = Bitmap.createScaledBitmap(bmp,240,190, false);
 
         //btn.setOnClickListener();
 
@@ -138,9 +153,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         canvas.drawColor(Color.GRAY);
 //btn.view.Bitmap
 
-        Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spacecraft1);
 
-        bmp = Bitmap.createScaledBitmap(bmp,140,190, false);
+	//leftKey.draw(canvas);
           //pic = R.drawable.spacecraft;
 
        // BitmapDrawable drawable = new BitmapDrawable(getResources(), bmp);

@@ -2,14 +2,15 @@ package com.a.myapplication;
 
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
+import android.graphics.Point;
 
 public class Buttons {
 	Bitmap bmp;
-	int pos[] ;
-	int size[];
+	Point pos;
+	Point size;
 
 
-	public Buttons(int pos[], int size[], Bitmap bmp) {
+	public Buttons(Point pos, Point size, Bitmap bmp) {
 		this.pos = pos;
 		this.size = size;
 		this.bmp = bmp;
@@ -17,8 +18,8 @@ public class Buttons {
 	}
 
 	public boolean clicked(int clickPos[]){
-		if(clickPos[0]> pos[0] && clickPos[0]< pos[0]+size[0]){
-			if(clickPos[1]> pos[1] && clickPos[1]< pos[1]+size[1]){
+		if(clickPos[0]> pos.x && clickPos[0]< pos.x +size.x){
+			if(clickPos[1]> pos.y && clickPos[1]< pos.y +size.y){
 
 				return true;
 			}
@@ -29,24 +30,14 @@ public class Buttons {
 
 
 	public void draw(Canvas canvas) {
+		bmp = Bitmap.createScaledBitmap(bmp,size.x, size.y, false);
+		canvas.drawBitmap(bmp, pos.x, pos.y, null); // 24 is the height of image
 	}
 
 
-	public void setSize(int[] size) {
-		this.size = size;
-	}
 
-	public int[] getSize() {
-		return size;
-	}
 
-	public void setPos(int[] pos) {
-		this.pos = pos;
-	}
 
-	public int[] getPos() {
-		return pos;
-	}
 
 	public void setBmp(Bitmap bmp) {
 		this.bmp = bmp;
@@ -54,5 +45,21 @@ public class Buttons {
 
 	public Bitmap getBmp() {
 		return bmp;
+	}
+
+	public void setPos(Point pos) {
+		this.pos = pos;
+	}
+
+	public Point getPos() {
+		return pos;
+	}
+
+	public void setSize(Point size) {
+		this.size = size;
+	}
+
+	public Point getSize() {
+		return size;
 	}
 }
