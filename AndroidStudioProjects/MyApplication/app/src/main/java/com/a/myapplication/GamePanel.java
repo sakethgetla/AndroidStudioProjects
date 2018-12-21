@@ -1,5 +1,4 @@
 package com.a.myapplication;
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -16,6 +15,7 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 
 public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private MainThread thread;
@@ -24,6 +24,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Point playerPoint;
     private final int speed = 5;
     private Button btn;
+    //private ImageView img;
 
     public GamePanel(Context context) {
 
@@ -56,9 +57,20 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
                 playerPoint.x -= speed;
             }
         });
-	*/
-	
+	*
 
+	 //img = (ImageView) findViewById(R.id.imageView);
+
+	img = new ImageView();
+	img.setOnClickListener(new View.OnClickListener() {
+
+		@Override
+		public void onClick(View v) {
+		    //some code
+		}
+	    });
+
+	*/
 
     }
 
@@ -124,13 +136,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawColor(Color.GRAY);
+//btn.view.Bitmap
 
         Bitmap bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spacecraft1);
 
-        bmp = Bitmap.createScaledBitmap(
-                bmp,140,190, false);
+        bmp = Bitmap.createScaledBitmap(bmp,140,190, false);
           //pic = R.drawable.spacecraft;
-
 
        // BitmapDrawable drawable = new BitmapDrawable(getResources(), bmp);
        // drawable.setAlpha(100);
@@ -147,7 +158,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
        // bmp = (Bitmap) drawable;
 
-          canvas.drawBitmap(bmp , 50,50 - 24, null); // 24 is the height of image
+          canvas.drawBitmap(bmp, playerPoint.x, playerPoint.y, null); // 24 is the height of image
+          //canvas.drawBitmap(bmp , 50,50 - 24, null); // 24 is the height of image
 
         //canvas.drawPicture();
         //btn.draw(canvas);
