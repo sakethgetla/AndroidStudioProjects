@@ -24,6 +24,7 @@ public class MainThread extends Thread {
 
     @Override
     public void run() {
+	    gamePanel.init();
         long startTime;
         long timeMillis = 1000 / MAX_FPS;
         long waitTime;

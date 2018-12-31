@@ -24,13 +24,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     private Buttons leftKey;
     private Buttons rightKey;
     private Point playerPoint;
-    private Point leftKeyPos;
-    private Point rightKeyPos;
     private Point btnSize;
     private final int speed = 5;
     private Button btn;
-    private Bitmap leftKeyImg = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
-    private Bitmap rightKeyImg = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+    private Bitmap leftKeyImg; 
+    private Bitmap rightKeyImg; 
 	private Bitmap bmp;
     //private ImageView img;
 
@@ -45,20 +43,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         setFocusable(true);
 
         playerPoint = new Point(this.getWidth() / 2, this.getHeight());
+	//System.out.println(btnSize.x + "kjjjjjjjjjjjj " + btnSize.y);
+
 
         pRect = new RectPlayer(playerPoint.x, playerPoint.y, Color.rgb(255, 0, 0));
-	//btnSize.set(110,100);
-
-	leftKey = new Buttons(leftKeyPos, btnSize, leftKeyImg);
-	rightKey = new Buttons(rightKeyPos, btnSize, rightKeyImg);
+	
+	//rightKey = new Buttons(new Point(150, 50), btnSize, rightKeyImg);
 	
 
-        //btn = new Button(context);
-
-        //btn.setLeft(50);
-        //btn.setRight(50);
-        //btn.setWidth(100);
-        //btn.setHeight(100);
         bmp = BitmapFactory.decodeResource(getResources(), R.drawable.spacecraft1);
         bmp = Bitmap.createScaledBitmap(bmp,240,190, false);
 
@@ -128,6 +120,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
             case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
                 playerPoint.set((int) event.getX(), (int) event.getY());
+		if (leftKey.clicked((int) event.getX(), (int) event.getY())){
+
+			System.out.println("kjakejfhkesjhfkesjfhkesjhfhejjjjjjjjjjj " );
+		}
                 break;
 
 
@@ -137,6 +133,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         return true;
     }
 
+    public void init() {
+        btnSize = new Point(this.getWidth() /8 , this.getHeight()/8);
+	System.out.println(btnSize.x + "kjjjjjjjjjjjj " + btnSize.y);
+	leftKeyImg = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+
+        leftKeyImg = Bitmap.createScaledBitmap(leftKeyImg, btnSize.x, btnSize.y, false);
+	leftKey = new Buttons(new Point(150, 50), btnSize, leftKeyImg);
+    }
     public void update() {
         pRect.update(playerPoint);
 
@@ -151,7 +155,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
     public void draw(Canvas canvas) {
         super.draw(canvas);
         canvas.drawColor(Color.GRAY);
-//btn.view.Bitmap
+        //btn.view.Bitmap
 
 
 	//leftKey.draw(canvas);
@@ -171,8 +175,13 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         //drawable.draw(canvas);
 
        // bmp = (Bitmap) drawable;
+//canvas.drawBitmap(rightKey.getBmp(), rightKey.pos.x, rightKey.pos.y, null); // 24 is the height of image
+       //
 
-          canvas.drawBitmap(bmp, playerPoint.x, playerPoint.y, null); // 24 is the height of image
+	//leftKey.draw(canvas);
+	//rightKey.draw(canvas);
+		canvas.drawBitmap(bmp, playerPoint.x, playerPoint.y, null); // 24 is the height of image
+		canvas.drawBitmap(leftKey.getBmp(), leftKey.getPos().x, leftKey.getPos().y, null); // 24 is the height of image
           //canvas.drawBitmap(bmp , 50,50 - 24, null); // 24 is the height of image
 
         //canvas.drawPicture();
