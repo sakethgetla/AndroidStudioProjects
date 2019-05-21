@@ -32,6 +32,7 @@ public class Buttons {
 	public boolean clicked(int x, int y){
 		if(x > pos.x && x < pos.x +size.x){
 			if(y > pos.y && y < pos.y +size.y){
+				System.out.println("key clicked" );
 
 				return true;
 			}
@@ -40,7 +41,7 @@ public class Buttons {
 	}
 
 	public void draw(Canvas canvas) {
-		bmp = Bitmap.createScaledBitmap(bmp,size.x, size.y, false);
+		//bmp = Bitmap.createScaledBitmap(bmp,size.x, size.y, false);
 		canvas.drawBitmap(bmp, pos.x, pos.y, null); // 24 is the height of image
 	}
 

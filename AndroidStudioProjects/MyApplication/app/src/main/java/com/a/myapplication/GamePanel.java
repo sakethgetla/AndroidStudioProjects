@@ -10,27 +10,34 @@ import android.graphics.Point;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.media.Image;
+import android.util.Log;
+import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.ImageView;
 
-public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
-    private MainThread thread;
+import java.util.logging.Handler;
 
-    private RectPlayer pRect;
-    private Buttons leftKey;
-    private Buttons rightKey;
-    private Point playerPoint;
-    private Point btnSize;
-    private final int speed = 5;
-    private Button btn;
-    private Bitmap leftKeyImg; 
-    private Bitmap rightKeyImg; 
+public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
+	private MainThread thread;
+
+	private RectPlayer pRect;
+	private Buttons leftKey;
+	private Buttons rightKey;
+	private Point playerPoint;
+	private Point btnSize;
+	private final int speed = 5;
+	private Button btn;
+	private Bitmap leftKeyImg; 
+	private Bitmap rightKeyImg; 
 	private Bitmap bmp;
+	private Boolean start = false ;
     //private ImageView img;
+
 
     public GamePanel(Context context) {
 
@@ -113,23 +120,72 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         }
     }
 
+    //final Handler handler = new Handler();
+    //Runnable mLongPressed = new Runnable() {
+    //    public void run() {
+    //        Log.i("", "Long press!");
+    //    }
+    //};
+
+
+
+    //@Override
+    //public boolean onTouchEvent(MotionEvent event, MapView mapView){
+    //    if(event.getAction() == MotionEvent.ACTION_DOWN)
+    //        handler.postDelayed(mLongPressed, ViewConfiguration.getLongPressTimeout());
+    //    if((event.getAction() == MotionEvent.ACTION_MOVE)||(event.getAction() == MotionEvent.ACTION_UP))
+    //        handler.removeCallbacks(mLongPressed);
+    //    return super.onTouchEvent(event, mapView);
+    //}
+
+    final GestureDetector gestureDetector = new GestureDetector(new GestureDetector.SimpleOnGestureListener() {
+        public void onLongPress(MotionEvent e) {
+            Log.e("", "Longpress detected");
+        }
+    });
+
+//    public boolean onTouchEvent(MotionEvent event) {
+//    };
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
             case MotionEvent.ACTION_MOVE:
-                playerPoint.set((int) event.getX(), (int) event.getY());
+		if (pRect.clicked((int) event.getX(), (int) event.getY())){
+			//System.out.println("player clicked on bar" );
+			playerPoint.x = (int) event.getX() - (pRect.getWidth()/2);
+			//playerPoint.y = even.getY() ;
+			//pRect.setPos(playerPoint);
+			//playerPoint.set((int) event.getX() - (pRect.getWidth()/2),  pRect.getPos().y);
+                break;
+
+		}
+
+            case MotionEvent.ACTION_DOWN:
+            case MotionEvent.ACTION_HOVER_ENTER:
+		if (!start){
+			start = true;
+			thread.setRunning(start);
+			//thread.start();
+		}
 		if (leftKey.clicked((int) event.getX(), (int) event.getY())){
 
 			System.out.println("kjakejfhkesjhfkesjfhkesjhfhejjjjjjjjjjj " );
 		}
+		if (rightKey.clicked((int) event.getX(), (int) event.getY())){
+			System.out.println("kjakejfhkesjhfkesjfhkesjhfhejjjjjjjjjjj " );
+		}
+		//if (pRect.clicked((int) event.getX(), (int) event.getY())){
+		//	//System.out.println("player clicked on bar" );
+
+		//}
                 break;
 
 
         }
 
         //return super.onTouchEvent(event);
+        //return gestureDetector.onTouchEvent(event);
         return true;
     }
 
@@ -137,13 +193,19 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         btnSize = new Point(this.getWidth() /8 , this.getHeight()/8);
 	System.out.println(btnSize.x + "kjjjjjjjjjjjj " + btnSize.y);
 	leftKeyImg = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
-
         leftKeyImg = Bitmap.createScaledBitmap(leftKeyImg, btnSize.x, btnSize.y, false);
 	leftKey = new Buttons(new Point(150, 50), btnSize, leftKeyImg);
+
+	rightKeyImg = BitmapFactory.decodeResource(getResources(), R.drawable.marker);
+        rightKeyImg = Bitmap.createScaledBitmap(rightKeyImg, btnSize.x, btnSize.y, false);
+	rightKey = new Buttons(new Point(50, 50), btnSize, rightKeyImg);
+	playerPoint.set( 0, (int) this.getHeight() - pRect.getHeight() - 10);
+
     }
+
     public void update() {
         pRect.update(playerPoint);
-
+	
 
     }
 
@@ -181,7 +243,8 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 	//leftKey.draw(canvas);
 	//rightKey.draw(canvas);
 		canvas.drawBitmap(bmp, playerPoint.x, playerPoint.y, null); // 24 is the height of image
-		canvas.drawBitmap(leftKey.getBmp(), leftKey.getPos().x, leftKey.getPos().y, null); // 24 is the height of image
+		//canvas.drawBitmap(leftKey.getBmp(), leftKey.getPos().x, leftKey.getPos().y, null); // 24 is the height of image
+		//canvas.drawBitmap(leftKey.getBmp(), leftKey.getPos().x, leftKey.getPos().y, null); // 24 is the height of image
           //canvas.drawBitmap(bmp , 50,50 - 24, null); // 24 is the height of image
 
         //canvas.drawPicture();

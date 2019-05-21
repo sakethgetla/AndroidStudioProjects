@@ -11,19 +11,21 @@ public class RectPlayer implements GameObject {
     private int color;
 
 
-    private int height = 110;
-    private int width = 20;
-    private int x, y;
+    private int height = 90;
+    private int width = 320;
+    private Point pos;
     //private point point= new Point(0,0);
 
 
     public RectPlayer(int x, int y, int color) {
-        this.x = x;
-        this.y = y;
 
         // this.rect = new Rect(x, y, color);
         this.color = color;
         //this.rect.width();
+	pos = new Point(x, y);
+	//pos.set(pos.x, pos.y);
+
+	
 
 
     }
@@ -50,7 +52,7 @@ public class RectPlayer implements GameObject {
         Paint paint = new Paint();
         paint.setColor(color);
 
-        canvas.drawRect(x, y, x + width, y + height, paint);
+        canvas.drawRect(pos.x, pos.y, pos.x + width, pos.y + height, paint);
     }
 
     @Override
@@ -58,9 +60,20 @@ public class RectPlayer implements GameObject {
 
     }
 
+	public boolean clicked(int x, int y){
+		if(x > pos.x && x < pos.x + width){
+			if(y > pos.y && y < pos.y + height){
+				//System.out.println("key clicked" );
+
+				return true;
+			}
+		}
+		return false;
+	}
+
     public void update(Point point) {
-        x = point.x;
-        y = point.y;
+        pos.x = point.x;
+        pos.y = point.y;
 
 
     }
