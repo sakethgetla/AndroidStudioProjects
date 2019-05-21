@@ -8,12 +8,14 @@ import android.graphics.Rect;
 public class Ball implements GameObject {
 	
 	private Point pos;
+	private Point vel;
 	private int size;
 	private int color;
 
-	public Ball(Point pos, int size, int color){
+	public Ball(Point pos, Point vel, int size, int color){
 		//this.pos = pos;
 		this.pos = new Point(pos);
+		this.vel = new Point(vel);
 		this.size = size;
 		this.color = color;
 	}
@@ -25,6 +27,14 @@ public class Ball implements GameObject {
 		return pos;
 	}
 
+	public void changeVelX(){
+		vel.x *= (-1);
+	}
+
+	public void changeVelY(){
+		vel.y *= (-1);
+	}
+
 	@Override
 	public void draw(Canvas canvas) {
 	Paint paint = new Paint();
@@ -33,6 +43,9 @@ public class Ball implements GameObject {
 	canvas.drawCircle(pos.x - (size/2), pos.y - (size/2), size, paint);
 	}
 
+	public void setVel(Point vel) {
+		this.vel = vel;
+	}
 	public void setSize(int size) {
 		this.size = size;
 	}
@@ -42,5 +55,6 @@ public class Ball implements GameObject {
 	}
 
 	public void update(){
+
 	}
 }
