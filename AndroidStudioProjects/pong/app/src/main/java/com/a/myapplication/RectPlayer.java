@@ -18,7 +18,7 @@ public class RectPlayer implements GameObject {
 
 
     RectPlayer(int x, int y, int color) {
-	this.pos = new Point(x, y);
+	    this.pos = new Point(x, y);
         // this.rect = new Rect(x, y, color);
         this.color = color;
         //this.rect.width();
@@ -68,6 +68,9 @@ public class RectPlayer implements GameObject {
 	public void setPos(Point pos){
 		this.pos = pos;
 
+	}
+	public Point getPos(){
+		return pos;
 	}
     @Override
     public void update() {
