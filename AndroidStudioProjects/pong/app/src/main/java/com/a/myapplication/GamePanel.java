@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewConfiguration;
 import android.widget.Button;
 import android.widget.ImageView;
+import java.util.*;
 
 import java.util.logging.Handler;
 
@@ -40,6 +41,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 	private Ball ball;
 	//private Ball ball;
 
+	ArrayList<Blocks> blockList = new ArrayList<Blocks>();
 	
 
     //private ImageView img;
@@ -76,7 +78,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 		ballSize = 20;
 		ballVelTot = 15;
 		ball = new Ball(playerPoint, new Point(0,0), ballSize, Color.rgb(255, 0, 0));
-	
+		
+		int totCol = 6;
+		int totRow = 6;
+		int blockWidth = this.getWidth()/totCol;
+		int blockHeight = (this.getHeight()/(2*totRow));
+
+		for( int N_col = 0 ; N_col < totCol ; N_col++) {
+			for(int N_row = 0 ; N_row < totRow ; N_row++) {
+				blockList.add(new Blocks(new Point(N_col*blockWidth, (1+N_row)*blockHeight), new Point(blockWidth, blockHeight), Color.rgb(225*(N_row%2), 255*(N_col%2), 0)));
+			}
+		}
 
 
 		//btnSize = new Point(this.getWidth() /8 , this.getHeight()/8);
@@ -222,6 +234,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 		ball.update();
 		//pRect.update();
 
+		for(Blocks blk: blockList){
+			if(blk.getVisible()){
+				if,q,q
+			}
+		}
 
 		if (ball.getPos().x - ball.getSize() < 0 || ball.getPos().x + ball.getSize() > this.getWidth() ) {
 			ball.changeVelX();
@@ -250,6 +267,17 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 	canvas.drawArc(50, 20, 105, 400, -90, 90, true, paint);
 	paint.setColor(Color.rgb(255, 0, 0));
 	canvas.drawArc(playerPoint.x, playerPoint.y - 30, playerPoint.x + pRect.getWidth(), playerPoint.y + pRect.getHeight(), 0, -180, false, paint);
+	
+	// make the log on the bottom curved
+	
+	for(Blocks blk: blockList){
+		if(blk.getVisible()){
+			blk.draw(canvas);
+		}
+
+	}
+
+
 	//canvas.drawArc(50, 105, 100, 0, 50, 40);
         //btn.view.Bitmap
 

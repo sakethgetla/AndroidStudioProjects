@@ -14,43 +14,41 @@ public class RectPlayer implements GameObject {
 	private int height = 90;
 	private int width = 320;
 	private Point pos;
+	private Point lastPos;
 	//private point point= new Point(0,0);
 
 
-	RectPlayer(int x, int y, int color) {
-	    this.pos = new Point(x, y);
-	// this.rect = new Rect(x, y, color);
-	this.color = color;
-	//this.rect.width();
-	pos.set(pos.x, pos.y);
-
-
-
+	public RectPlayer(int x, int y, int color) {
+		this.pos = new Point(x, y);
+		this.lastPos = new Point(x, y);
+		// this.rect = new Rect(x, y, color);
+		this.color = color;
+		//this.rect.width();
 	}
 
 	public int getHeight() {
-	return height;
+		return height;
 	}
 
 	public void setHeight(int height) {
-	this.height = height;
+		this.height = height;
 	}
 
 
 	public int getWidth() {
-	return width;
+		return width;
 	}
 
 	public void setWidth(int width) {
-	this.width = width;
+		this.width = width;
 	}
 
 	@Override
 	public void draw(Canvas canvas) {
-	Paint paint = new Paint();
-	paint.setColor(color);
+		Paint paint = new Paint();
+		paint.setColor(color);
 
-	canvas.drawRect(pos.x, pos.y, pos.x + width, pos.y + height, paint);
+		canvas.drawRect(pos.x, pos.y, pos.x + width, pos.y + height, paint);
 	}
 
 
@@ -66,6 +64,7 @@ public class RectPlayer implements GameObject {
 	}
 
 	public void setPos(Point pos){
+		this.lastPos = this.pos;
 		this.pos = pos;
 
 	}

@@ -13,7 +13,7 @@ public class Ball implements GameObject {
 	private int size;
 	private int color;
 
-	Ball(Point pos, Point vel, int size, int color){
+	public Ball(Point pos, Point vel, int size, int color){
 		//this.pos = pos;
 		this.lastPos = new Point(pos);
 		this.pos = new Point(pos);
