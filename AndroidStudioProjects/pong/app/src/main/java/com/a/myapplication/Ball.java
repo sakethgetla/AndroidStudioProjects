@@ -1,9 +1,9 @@
 package com.a.myapplication;
 
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.graphics.Point;
-import android.graphics.Rect;
+import android.graphics.*;
+//import android.graphics.Paint;
+//import android.graphics.Point;
+//import android.graphics.Rect;
 
 public class Ball implements GameObject {
 	
@@ -44,7 +44,9 @@ public class Ball implements GameObject {
 	public void draw(Canvas canvas) {
 		Paint paint = new Paint();
 		paint.setColor(color);
-		canvas.drawCircle(pos.x - (size/2), pos.y - (size/2), size, paint);
+		//canvas.drawCircle(pos.x - (size/2), pos.y - (size/2), size, paint);
+		canvas.drawCircle(pos.x, pos.y, size, paint);
+		paint.setColor(Color.rgb(0, 255, 0));
 		canvas.drawCircle(pos.x, pos.y, (size/2), paint);
 	}
 

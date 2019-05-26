@@ -29,8 +29,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 	private RectPlayer pRect;
 	//private Buttons leftKey;
 	//private Buttons rightKey;
-	private Point playerPoint;
-	private Point btnSize;
+	private Point playerPoint, playerSize, btnSize;
 	private final int speed = 5;
 	//private Button btn;
 	//private Bitmap leftKeyImg; 
@@ -70,9 +69,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 		//System.out.println(btnSize.x + "kjjjjjjjjjjjj " + btnSize.y);
 
 
-		playerPoint = new Point( (int) this.getWidth()/2, (int) this.getHeight()  - 100);
+		playerSize = new Point(this.getWidth()/3, this.getHeight()/15);
+		playerPoint = new Point((int) this.getWidth()/2, (int) this.getHeight() - playerSize.y);
 		//playerPoint = new Point( 0, 50);
-		pRect = new RectPlayer(playerPoint, new Point(this.getWidth()/3, this.getHeight()/10), Color.rgb(0, 255, 0));
+		pRect = new RectPlayer(playerPoint, playerSize, Color.rgb(0, 255, 0));
 		
 		//rightKey = new Buttons(new Point(150, 50), btnSize, rightKeyImg);
 		ballSize = 20;
@@ -237,7 +237,10 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 		for(Blocks blk: blockList){
 			if(blk.getVisible()){
 				if(ball.getPos().x < ball.getSize() + blk.getPos().x + blk.getSize().x && ball.getPos().x > blk.getPos().x - ball.getSize()){
-					// collision with the blocks
+					if(ball.getPos().y < ball.getSize() + blk.getPos().y + blk.getSize().y && ball.getPos().y > blk.getPos().y - ball.getSize()){
+						// collision with the blocks
+						blk.setVisible(false);
+					}
 				}
 			}
 		}
