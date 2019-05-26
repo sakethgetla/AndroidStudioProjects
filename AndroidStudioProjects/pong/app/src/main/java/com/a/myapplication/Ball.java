@@ -45,6 +45,7 @@ public class Ball implements GameObject {
 		Paint paint = new Paint();
 		paint.setColor(color);
 		canvas.drawCircle(pos.x - (size/2), pos.y - (size/2), size, paint);
+		canvas.drawCircle(pos.x, pos.y, (size/2), paint);
 	}
 
 	public void setVel(Point vel) {

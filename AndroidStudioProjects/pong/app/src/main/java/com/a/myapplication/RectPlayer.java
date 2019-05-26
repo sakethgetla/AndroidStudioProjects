@@ -18,9 +18,11 @@ public class RectPlayer implements GameObject {
 	//private point point= new Point(0,0);
 
 
-	public RectPlayer(int x, int y, int color) {
-		this.pos = new Point(x, y);
-		this.lastPos = new Point(x, y);
+	public RectPlayer(Point pos, Point size, int color) {
+		this.height = size.y;
+		this.width = size.x;
+		this.pos = new Point(pos);
+		this.lastPos = new Point(pos);
 		// this.rect = new Rect(x, y, color);
 		this.color = color;
 		//this.rect.width();

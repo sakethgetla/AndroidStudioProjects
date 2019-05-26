@@ -72,7 +72,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 		playerPoint = new Point( (int) this.getWidth()/2, (int) this.getHeight()  - 100);
 		//playerPoint = new Point( 0, 50);
-		pRect = new RectPlayer(playerPoint.x, playerPoint.y, Color.rgb(0, 255, 0));
+		pRect = new RectPlayer(playerPoint, new Point(this.getWidth()/3, this.getHeight()/10), Color.rgb(0, 255, 0));
 		
 		//rightKey = new Buttons(new Point(150, 50), btnSize, rightKeyImg);
 		ballSize = 20;
@@ -236,7 +236,9 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 		for(Blocks blk: blockList){
 			if(blk.getVisible()){
-				if,q,q
+				if(ball.getPos().x < ball.getSize() + blk.getPos().x + blk.getSize().x && ball.getPos().x > blk.getPos().x - ball.getSize()){
+					// collision with the blocks
+				}
 			}
 		}
 
@@ -257,8 +259,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
         super.draw(canvas);
         canvas.drawColor(Color.GRAY);
 
-        //pRect.draw(canvas);
-	ball.draw(canvas);
+        pRect.draw(canvas);
 
 	Paint paint = new Paint();
 	paint.setColor(Color.rgb(255, 0, 0));
@@ -277,6 +278,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 	}
 
+	ball.draw(canvas);
 
 	//canvas.drawArc(50, 105, 100, 0, 50, 40);
         //btn.view.Bitmap
