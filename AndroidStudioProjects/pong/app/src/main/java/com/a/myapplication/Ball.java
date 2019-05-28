@@ -31,6 +31,9 @@ public class Ball implements GameObject {
 	public Point getPos() {
 		return pos;
 	}
+	public Point getVel() {
+		return vel;
+	}
 
 	public void changeVelX(){
 		vel.x *= (-1);
@@ -39,7 +42,20 @@ public class Ball implements GameObject {
 	public void changeVelY(){
 		vel.y *= (-1);
 	}
+	public void setVelX(int velx ){
+		this.vel.x = velx;
+	}
+	public void setVelY(int vely ){
+		this.vel.y = vely;
+	}
 
+	public void setPosX(int posx ){
+		this.pos.x = posx;
+	}
+
+	public void setPosY(int posy ){
+		this.pos.y = posy;
+	}
 	@Override
 	public void draw(Canvas canvas) {
 		Paint paint = new Paint();

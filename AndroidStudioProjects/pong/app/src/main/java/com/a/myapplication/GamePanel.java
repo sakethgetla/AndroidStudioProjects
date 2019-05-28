@@ -70,7 +70,7 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 
 		playerSize = new Point(this.getWidth()/3, this.getHeight()/15);
-		playerPoint = new Point((int) this.getWidth()/2, (int) this.getHeight() - playerSize.y);
+		playerPoint = new Point((int) this.getWidth()/2,  this.getHeight() - (int)(1.5* playerSize.y));
 		//playerPoint = new Point( 0, 50);
 		pRect = new RectPlayer(playerPoint, playerSize, Color.rgb(0, 255, 0));
 		
@@ -79,14 +79,14 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 		ballVelTot = 15;
 		ball = new Ball(playerPoint, new Point(0,0), ballSize, Color.rgb(255, 0, 0));
 		
-		int totCol = 6;
-		int totRow = 6;
+		int totCol = 20;
+		int totRow = 20;
 		int blockWidth = this.getWidth()/totCol;
 		int blockHeight = (this.getHeight()/(2*totRow));
 
 		for( int N_col = 0 ; N_col < totCol ; N_col++) {
 			for(int N_row = 0 ; N_row < totRow ; N_row++) {
-				blockList.add(new Blocks(new Point(N_col*blockWidth, (1+N_row)*blockHeight), new Point(blockWidth, blockHeight), Color.rgb(225*(N_row%2), 255*(N_col%2), 0)));
+				blockList.add(new Blocks(new Point(N_col*blockWidth, (1+N_row)*blockHeight), new Point(blockWidth, blockHeight), Color.rgb(225*(N_row%2), 255*((N_col)%2), 0)));
 			}
 		}
 
@@ -192,6 +192,12 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 		if (pRect.clicked((int) event.getX(), (int) event.getY())){
 			//System.out.println("player clicked on bar" );
 			playerPoint.x = (int) event.getX() - (pRect.getWidth()/2);
+			//if (playerPoint.y > blockList.get(blockList.size()-1).getPos().y){
+			//	playerPoint.y = (int) event.getY() - (pRect.getHeight()/2);
+			//	if(ball.getVel().y <0){
+			//		ball.setPosY(playerPoint.y); 
+			//	}
+			//}
 			//playerPoint.y = even.getY() ;
 			//pRect.setPos(playerPoint);
 			//playerPoint.set((int) event.getX() - (pRect.getWidth()/2),  pRect.getPos().y);
