@@ -272,11 +272,11 @@ public class GamePanel extends SurfaceView implements SurfaceHolder.Callback {
 
 	Paint paint = new Paint();
 	paint.setColor(Color.rgb(255, 0, 0));
-	canvas.drawArc(50, 20, 405, 400, 0, 90, false, paint);
-	paint.setColor(Color.rgb(0, 255, 0));
-	canvas.drawArc(50, 20, 105, 400, -90, 90, true, paint);
-	paint.setColor(Color.rgb(255, 0, 0));
-	canvas.drawArc(playerPoint.x, playerPoint.y - 30, playerPoint.x + pRect.getWidth(), playerPoint.y + pRect.getHeight(), 0, -180, false, paint);
+	//canvas.drawArc(50, 20, 405, 400, 0, 90, false, paint);
+	//paint.setColor(Color.rgb(0, 255, 0));
+	//canvas.drawArc(50, 20, 105, 400, -90, 90, true, paint);
+	//paint.setColor(Color.rgb(255, 0, 0));
+	//canvas.drawArc(playerPoint.x, playerPoint.y - 30, playerPoint.x + pRect.getWidth(), playerPoint.y + pRect.getHeight(), 0, -180, false, paint);
 	
 	// make the log on the bottom curved
 	
